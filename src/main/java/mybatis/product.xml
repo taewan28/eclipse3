@@ -5,9 +5,31 @@
   
 <mapper namespace="tblproduct">
 
-	<select id="selectAll" resultType="ProductDto">
-		select * from tbl_product ORDER BY category desc
-	</select>
+	     <select id="getCategories" resultType="home.dto.CateDto">
+     	<!-- select distinct category from tbl_product order by category -->
+     	select * from tbl_category order by code 
+     </select>
+           <select id="search" resultType="ProductDto" parameterType="java.util.Map">
+        select * from tbl_product
+        <!-- if중의 하나라도 조건식이 만들어 질때만 where 작성 -->
+        <where>
+           <if test = "keyword!=null">
+              pname like '%' || #{keyword}||'%'
+           </if>
+           <!-- category 파라미터값이 null이 아닐때. -->
+           <if test="category!=null">
+              <!-- 필요한 경우에만 and 추가 앞의 조건식이 없으 면 제거됩니다. -->
+              <trim prefix="and">
+                 category = #{category}
+              </trim>
+           </if>
+           <if test="from!=null and to!=null">
+              <trim prefix="and">
+                 price between #{from} and #{to}
+              </trim>
+           </if>
+        </where>
+     </select>
 	<insert id="add" parameterType="ProductDto">
 		insert into tbl_product values (#{pcode}, #{category}, #{pname}, #{price})
 	</insert>

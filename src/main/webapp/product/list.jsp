@@ -12,6 +12,22 @@
 </head>
 <body>
 	<h2>상품 전체 목록</h2>
+	<div class="search">
+		<form action="">
+		<select name="category" id="catee">
+			<option value="">카테고리 선택</option>
+			<c:forEach items="${cateList }" var="cate">
+				<option value="${cate.code}"><c:out value="${cate.name }" /></option>
+			</c:forEach>
+		</select>
+		<input type="text" name="keyword" placeholder="상품명 검색어 입력하세요." value="${keyword }">
+		<span style="padding-left: 10px;">가격대별</span>
+		<input type="text" name="from" placeholder="10000"><b>~</b>
+		<input type="text" name="to" placeholder="50000">
+		<button id="search" type="submit">조회</button>
+		<button id="selectAll" type="button" onclick="location.href='list'">전체보기</button>
+		</form>
+	</div>
 	<hr>
 	<ul>
 		<c:forEach items="${productList }" var="vo" varStatus="status">
@@ -27,5 +43,9 @@
 
 		</c:forEach>
 	</ul>
+	<script type="text/javascript">
+		const temp = '${cate}'
+	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/search.js"></script>
 </body>
 </html>

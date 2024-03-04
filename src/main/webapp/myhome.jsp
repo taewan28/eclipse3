@@ -13,7 +13,7 @@
 	<h2>My Home</h2>
 	<hr>
 	<ul>
-		<li><a href="product/list">상품 전체 목록</a></li>
+		<li><a href="product/list">상품 조회</a></li>
 		<li><a href="product/add">상품 등록</a></li>
 		<li><a href="customer/list">회원 전체 목록</a></li>
 		<li><a href="customer/join">회원 등록</a></li>
